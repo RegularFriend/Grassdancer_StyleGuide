@@ -1,8 +1,4 @@
-# The Official raywenderlich.com C# Style Guide
-
-This style guide is different from other you may see, because the focus is
-centered on readability for print and the web. We created this style guide to
-keep the code in our tutorials consistent. This style guide is based on the Java Style Guide. Being that the two languages have a lot in common, it makes sense to leverage the work being performed by the Android team.
+# The Official Grassdancer C# Style Guide
 
 Our overarching goals are __conciseness__, __readability__ and __simplicity__. Also, this guide is written to keep Unity in mind. 
 
