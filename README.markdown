@@ -206,13 +206,15 @@ member variables.
 __BAD:__
 
 ```c#
-string word intId;
+string word 
+int Id;
 ```
 
 __GOOD:__
 
 ```c#
-protected string word intId;
+protected string word 
+private int Id;
 ```
 ### Fields & Variables
 
