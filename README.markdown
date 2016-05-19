@@ -236,7 +236,7 @@ string twitterHandle;
 ### Classes
 
 Exactly one class per source file, except for tiny struct-like classes used in the 
-main class of a source file
+main class of a source file.
 
 ### Interfaces
 
@@ -256,50 +256,9 @@ IRadialSlider
 
 ## Spacing
 
-Spacing is especially important in raywenderlich.com code, as code needs to be
-easily readable as part of the tutorial. 
-
 ### Indentation
 
-Indentation is using spaces - never tabs.
-
-#### Blocks
-
-Indentation for blocks uses 2 spaces (not the default 4):
-
-__BAD:__
-
-```c#
-for (int i = 0; i < 10; i++) {
-    Debug.Log("index=" + i);
-}
-```
-
-__GOOD:__
-
-```c#
-for (int i = 0; i < 10; i++) {
-  Debug.Log("index=" + i);
-}
-```
-
-#### Line Wraps
-
-Indentation for line wraps should use 4 spaces (not the default 8):
-
-__BAD:__
-
-```c#
-CoolUiWidget widget =
-        someIncrediblyLongExpression(that, reallyWouldNotFit, on, aSingle, line);
-```
-
-__GOOD:__
-
-```c#
-CoolUiWidget widget =
-    someIncrediblyLongExpression(that, reallyWouldNotFit, on, aSingle, line);
-```
+Always indent - never spaces.
 
 ### Line Length
 
@@ -322,15 +281,13 @@ same line as preceding code:
 __BAD:__
 
 ```c#
-class MyClass
-{
+class MyClass{
   void DoSomething()
   {
     if (someTest)
     {
       // ...
-    }
-    else
+    } else
     {
       // ...
     }
@@ -341,11 +298,13 @@ class MyClass
 __GOOD:__
 
 ```c#
-class MyClass {
+class MyClass 
+{
   void DoSomething() {
     if (someTest) {
       // ...
-    } else {
+    } 
+	else {
       // ...
     }
   }
