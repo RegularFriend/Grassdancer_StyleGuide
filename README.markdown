@@ -275,8 +275,10 @@ several methods.
 
 ## Brace Style
 
-Only trailing closing-braces are awarded their own line. All others appear the
-same line as preceding code:
++	The opening-braces for Classes and functions get their own lines.
++	All other opening-braces -- ifs, elses, etc. -- should be on the same line as the preceding statement.
++	Trailing closing-braces always get their own line.
++	Else gets its own line
 
 __BAD:__
 
