@@ -282,8 +282,7 @@ __BAD:__
 
 ```c#
 class MyClass{
-  void DoSomething()
-  {
+  void DoSomething(){
     if (someTest)
     {
       // ...
@@ -300,7 +299,8 @@ __GOOD:__
 ```c#
 class MyClass 
 {
-  void DoSomething() {
+  void DoSomething() 
+  {
     if (someTest) {
       // ...
     } 
