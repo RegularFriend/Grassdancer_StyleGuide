@@ -2,10 +2,6 @@
 
 Our overarching goals are __conciseness__, __readability__ and __simplicity__. Also, this guide is written to keep Unity in mind. 
 
-You should also check out out [Java](https://github.com/raywenderlich/java-style-guide), [Swift](https://github.com/raywenderlich/swift-style-guide),
-and [Objective-C](https://github.com/raywenderlich/objective-c-style-guide)
-style guides too.
-
 ## Inspiration
 
 This style-guide is somewhat of a mash-up between the existing C# language
@@ -43,22 +39,22 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
 
 On the whole, naming should follow C# standards.
 
-### Namespaces
+### Script Files
 
-Namespaces are all __UpperCamelCase__, multiple words concatenated together,
+Script files are all __UpperCamelCase__, multiple words concatenated together,
 without
 hypens or underscores:
 
 __BAD__:
 
 ```c#
-com.raywenderlich.fpsgame.hud.healthbar
+gameManager.cs
 ```
 
 __GOOD__:
 
 ```c#
-RayWenderlich.FPSGame.HUD.Healthbar
+GameManager.cs
 ```
 
 ### Classes & Interfaces
@@ -70,6 +66,18 @@ Written in __UpperCamelCase__. For example `RadialSlider`.
 Public methods are written in __UpperCamelCase__. For example `DoSomething`. 
 
 Private methods are written in __lowerCamelCase__. For example: `doSometing`
+
+__BAD__:
+
+```c#
+private function MyFunction()
+```
+
+__GOOD__:
+
+```c#
+private function myFunction()
+```
 
 ### Fields
 
