@@ -164,10 +164,6 @@ public delegate void RenderCallback()
 ```
 ### Events
 
-__SETTING UP AN EVENT__
-```public delegate void LogMessageEventHandler( string message );`
-```public static event LogMessageEventHandler OnLogMessage;
-
 Prefix event methods with the prefix __On__.
 
 __BAD:__
@@ -207,6 +203,17 @@ findPostById
 Access level modifiers should be explicitly defined for classes, methods and
 member variables.
 
+__BAD:__
+
+```c#
+string word intId;
+```
+
+__GOOD:__
+
+```c#
+protected string word intId;
+```
 ### Fields & Variables
 
 Prefer single declaration per line.
