@@ -340,74 +340,22 @@ Switch statements fall-through by default, but this can be unintuitive. Do not u
 
 Alway include the `default` case.
 
-## Language
+## Singleton Style
 
-Use US English spelling.
 
-__BAD:__
-
-```c#
-string colour = "red";
-```
-
-__GOOD:__
+__Declaration:__
 
 ```c#
-string color = "red";
+private static GameManager Instance;
+private static GameManager GetInstance() 
+{
+	if (Instance == null){
+		Instance = this;
+		DontDestroyOnLoad(gameObject);
+	} 
+	else {
+		Destroy() //Oh no this breaks it!
+	}
+	return Instance;
+}
 ```
-
-## Copyright Statement
-
-The following copyright statement should be included at the top of every source
-file:
-
-    /*
-     * Copyright (c) 2015 Razeware LLC
-     * 
-     * Permission is hereby granted, free of charge, to any person obtaining a copy
-     * of this software and associated documentation files (the "Software"), to deal
-     * in the Software without restriction, including without limitation the rights
-     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-     * copies of the Software, and to permit persons to whom the Software is
-     * furnished to do so, subject to the following conditions:
-     * 
-     * The above copyright notice and this permission notice shall be included in
-     * all copies or substantial portions of the Software.
-     * 
-     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-     * THE SOFTWARE.
-     */
-
-## Smiley Face
-
-Smiley faces are a very prominent style feature of the raywenderlich.com site!
-It is very important to have the correct smile signifying the immense amount of
-happiness and excitement for the coding topic. The closing square bracket ] is
-used because it represents the largest smile able to be captured using ASCII
-art. A closing parenthesis ) creates a half-hearted smile, and thus is not
-preferred.
-
-Bad:
-
-    :)
-
-Good:
-
-    :]
-
-## Credits
-
-This style guide is a collaborative effort from the most stylish
-raywenderlich.com team members:
-
-- [Darryl Bayliss](https://github.com/DarrylBayliss)
-- [Sam Davies](https://github.com/sammyd)
-- [Mic Pringle](https://github.com/micpringle)
-- [Brian Moakley] (https://github.com/VegetarianZombie)
-- [Ray Wenderlich](https://github.com/rwenderlich)
-
