@@ -48,7 +48,7 @@ hypens or underscores:
 __BAD__:
 
 ```c#
-gameManager.cs
+game_Manager.cs
 ```
 
 __GOOD__:
@@ -61,22 +61,22 @@ GameManager.cs
 
 Written in __UpperCamelCase__. For example `RadialSlider`. 
 
-### Methods
+### Functions
 
-Public methods are written in __UpperCamelCase__. For example `DoSomething`. 
+Public functions are written in __UpperCamelCase__. For example `DoSomething`. 
 
-Private methods are written in __lowerCamelCase__. For example: `doSometing`
+Private functions are written in __lowerCamelCase__. For example: `doSometing`
 
 __BAD__:
 
 ```c#
-private function MyFunction()
+private void MyFunction()
 ```
 
 __GOOD__:
 
 ```c#
-private function myFunction()
+private void myFunction()
 ```
 
 ### Fields
