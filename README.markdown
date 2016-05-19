@@ -214,7 +214,7 @@ __GOOD:__
 
 ```c#
 protected string word 
-private int Id;
+private int id;
 ```
 ### Fields & Variables
 
@@ -235,8 +235,8 @@ string twitterHandle;
 
 ### Classes
 
-Exactly one class per source file, although inner classes are encouraged where
-scoping appropriate.
+Exactly one class per source file, except for tiny struct-like classes used in the 
+main class of a source file
 
 ### Interfaces
 
