@@ -83,7 +83,7 @@ private void myFunction()
 
 Written in __lowerCamelCase__.
 
-Static fields should be written in __UpperCamelCase__:
+Static fields, including singletons, should be written in __UpperCamelCase__:
 
 ```c#
 public static int TheAnswer = 42;
@@ -136,7 +136,7 @@ Single character values to be avoided except for temporary looping variables.
 
 ### Delegates
 
-Delegats are written in __UpperCamelCase__.
+Delegates are written in __UpperCamelCase__.
 
 When declaring delegates, DO add the suffix __EventHandler__ to names of delegates that are used in events. 
 
@@ -163,6 +163,10 @@ __GOOD:__
 public delegate void RenderCallback()
 ```
 ### Events
+
+__SETTING UP AN EVENT__
+```public delegate void LogMessageEventHandler( string message );`
+```public static event LogMessageEventHandler OnLogMessage;
 
 Prefix event methods with the prefix __On__.
 
