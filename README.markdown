@@ -140,6 +140,13 @@ Delegates are written in __UpperCamelCase__.
 
 When declaring delegates, DO add the suffix __EventHandler__ to names of delegates that are used in events. 
 
+__Example:__
+
+```c#
+public delegate void LogMessageEventHandler(string message);
+public static event LogMessageEventHandler OnLogMessage;
+```
+
 __BAD:__
 
 ```c#
