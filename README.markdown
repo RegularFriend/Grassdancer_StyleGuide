@@ -350,6 +350,7 @@ Alway include the `default` case.
 
 ## Singleton Style
 Singleton.cs is a script we will use to define singleton behavior. All singletons will inherit from this class.
+
 __Singleton.cs__
 ```c#
 using UnityEngine;
