@@ -458,6 +458,6 @@ raywenderlich.com team members:
 
 As well as the Sugarscape Engineers
 
-- [Will Anderson]
-- [Brendan LoBuglio]
-- [Chloe Lister]
+- Will Anderson
+- Brendan LoBuglio
+- Chloe Lister
