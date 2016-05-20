@@ -29,10 +29,8 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
   + [Vertical Spacing](#vertical-spacing)
 - [Brace Style](#brace-style)
 - [Switch Statements](#switch-statements)
-- [Language](#language)
-- [Copyright Statement](#copyright-statement)
-- [Smiley Face](#smiley-face)
-- [Credit](#credits)
+- [Singleton Style] (#singleton-style)
+- [Unity Editor] (#unity-editor)
 
 
 ## Nomenclature
@@ -443,5 +441,5 @@ __Exposed Variables__
 
 +	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
 +	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
-+	The name of a GameObject should never matter.
++	The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
 +	The order of GameObjects in the heirarchy should never matter except in the case of UI.
