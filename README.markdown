@@ -441,4 +441,7 @@ http://wiki.unity3d.com/index.php?title=Singleton
 
 __Exposed Variables__
 
-"For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```"
++	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
++	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
++	The name of a GameObject should never matter.
++	The order of GameObjects in the heirarchy should never matter except in the case of UI.
