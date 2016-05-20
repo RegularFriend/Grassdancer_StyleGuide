@@ -438,3 +438,6 @@ public class Manager : Singleton<Manager>
 	public string myGlobalVar = "whatever";
 }
 ```
+
+__Unity reference:__
+http://wiki.unity3d.com/index.php?title=Singleton
