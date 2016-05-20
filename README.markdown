@@ -31,6 +31,7 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
 - [Switch Statements](#switch-statements)
 - [Singleton Style] (#singleton-style)
 - [Unity Editor] (#unity-editor)
+- [Credits] (#credits)
 
 
 ## Nomenclature
@@ -442,4 +443,21 @@ __Exposed Variables__
 +	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
 +	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
 +	The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
-+	The order of GameObjects in the heirarchy should never matter except in the case of UI.
++	Whenever possible, the ​_hierarchical order_​ of gameobjects should not matter. The one exception is the order of Canvas children, where the order is used for Z-indexes.
+
+## Credits
+
+This style guide is a collaborative effort from the most stylish
+raywenderlich.com team members:
+
+- [Darryl Bayliss](https://github.com/DarrylBayliss)
+- [Sam Davies](https://github.com/sammyd)
+- [Mic Pringle](https://github.com/micpringle)
+- [Brian Moakley] (https://github.com/VegetarianZombie)
+- [Ray Wenderlich](https://github.com/rwenderlich)
+
+As well as the Sugarscape Engineers
+
+- [Will Anderson]
+- [Brendan LoBuglio]
+- [Chloe Lister]
