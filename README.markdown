@@ -40,7 +40,11 @@ The goals of this style guide are **conciseness**, **readibility**, and **ease o
 
 
 ## Visual Studio Settings
-Here is a policy file that can be imported into visual studio to set up automatic formatting. It can be imported through Tools->Import and Export Settings->Import selected environment settings. Click on the settings file and you should be good to go. *This will not overwrite your syntax highlight settings and color scheme*
+Here(https://drive.google.com/open?id=0Bxad50Rx4CmIbXZjQmdtOFVlNE0) is a policy file that can be imported into visual studio to set up automatic formatting. 
+
+It can be imported through Tools->Import and Export Settings->Import selected environment settings. Click on the settings file and you should be good to go. 
+
+*This will not overwrite your syntax highlight settings and color scheme*
 ## Nomenclature
 
 On the whole, naming should follow C# standards.
