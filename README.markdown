@@ -4,7 +4,7 @@ Our overarching goals are __conciseness__, __readability__ and __simplicity__. A
 
 ## Inspiration
 
-This style guide is forked from the raywenderlich(https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide but wiht alterations for our team's needs.
+This style guide is forked from the [raywenderlich](https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide but wiht alterations for our team's needs.
 
 The goals of this style guide are **conciseness**, **readibility**, and **ease of use** for the entire Sugarscape team.
 
@@ -40,7 +40,7 @@ The goals of this style guide are **conciseness**, **readibility**, and **ease o
 
 
 ## Visual Studio Settings
-Here(https://drive.google.com/open?id=0Bxad50Rx4CmIbXZjQmdtOFVlNE0) is a policy file that can be imported into visual studio to set up automatic formatting. 
+[Here](https://drive.google.com/open?id=0Bxad50Rx4CmIbXZjQmdtOFVlNE0) is a policy file that can be imported into visual studio to set up automatic formatting. 
 
 It can be imported through Tools->Import and Export Settings->Import selected environment settings. Click on the settings file and you should be good to go. 
 
