@@ -10,28 +10,30 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
 ## Table of Contents
 
 - [Nomenclature](#nomenclature)
-  + [Namespaces](#namespaces)
+  + [Script Files](#script-files)
   + [Classes & Interfaces](#classes--interfaces)
   + [Methods](#methods)
   + [Fields](#fields)
   + [Parameters](#parameters--parameters)
   + [Delegates](#delegates--delegates)
   + [Events](#events--events)
+  + [Coroutines](#coroutines)
   + [Misc](#misc)
 - [Declarations](#declarations)
   + [Access Level Modifiers](#access-level-modifiers)
   + [Fields & Variables](#fields--variables)
-  + [Classes](#classes)
+  + [Classes](#classe)
   + [Interfaces](#interfaces)
+  + [Enums](#Enums)
 - [Spacing](#spacing)
   + [Indentation](#indentation)
   + [Line Length](#line-length)
   + [Vertical Spacing](#vertical-spacing)
 - [Brace Style](#brace-style)
 - [Switch Statements](#switch-statements)
-- [Singleton Style] (#singleton-style)
-- [Unity Editor] (#unity-editor)
-- [Credits] (#credits)
+- [Unity Editor](#unity-editor)
+  + [Exposed Variables]()
+- [Credits](#credits)
 
 
 ## Nomenclature
@@ -183,6 +185,14 @@ __GOOD:__
 public static event CloseCallback OnClose;
 ```
 
+### Coroutines
+
+Coroutines are written __UpperCamelCase__.
+
+When declaring delegates, DO add the suffix __Thread__. 
+
+Coroutines should __always be private__. Use regular functions as wrappers when necessary.
+
 ### Misc
 
 In code, acronyms should be treated as words. For example:
@@ -260,6 +270,30 @@ __GOOD:__
 IRadialSlider
 ```
 
+### Enums
+
+Enums should always be declared inline.
+
+__BAD:__
+
+```c#
+enum Days {
+    Sat, 
+    Sun, 
+    Mon, 
+    Tue, 
+    Wed, 
+    Thu, 
+    Fri
+};
+```
+
+__GOOD:__
+
+```c#
+enum Days {Sat=1, Sun, Mon, Tue, Wed, Thu, Fri};
+```
+
 ## Spacing
 
 ### Indentation
@@ -268,7 +302,22 @@ Always indent - never spaces.
 
 ### Line Length
 
-Lines should be no longer than 100 characters long.
+Lines should be no longer than 150 characters. If a line exceeds 150 characters you should start a new line. Ideally lines will end after an operator (=, < ect).
+
+There should always be a single indent on the new line when a line is broken up in this manner.
+
+__BAD:__
+
+```c#
+int a = 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1;
+```
+
+__GOOD:__
+
+```c#
+int a = 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 
+    1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1;
+```
 
 
 ### Vertical Spacing
@@ -346,104 +395,19 @@ Switch statements fall-through by default, but this can be unintuitive. Do not u
 
 Alway include the `default` case.
 
-
-## Singleton Style
-Singleton.cs is a script we will use to define singleton behavior. All singletons will inherit from this class.
-
-__Singleton.cs__
-```c#
-using UnityEngine;
- 
-/// <summary>
-/// Be aware this will not prevent a non singleton constructor
-///   such as `T myT = new T();`
-/// To prevent that, add `protected T () {}` to your singleton class.
-/// 
-/// As a note, this is made as MonoBehaviour because we need Coroutines.
-/// </summary>
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
-{
-	private static T _instance;
-	private static object _lock = new object();
-	protected static T Instance
-	{
-		get{
-			if (applicationIsQuitting) {
-				Debug.LogWarning("[Singleton] Instance '"+ typeof(T) +
-					"' already destroyed on application quit." +
-					" Won't create again - returning null.");
-				return null;
-			}
- 
-			lock(_lock){
-				if (_instance == null){
-					_instance = (T) FindObjectOfType(typeof(T));
- 
-					if ( FindObjectsOfType(typeof(T)).Length > 1 ){
-						Debug.LogError("[Singleton] Something went really wrong " +
-							" - there should never be more than 1 singleton!" +
-							" Reopening the scene might fix it.");
-						return _instance;
-					}
- 
-					if (_instance == null)
-					{
-						GameObject singleton = new GameObject();
-						_instance = singleton.AddComponent<T>();
-						singleton.name = "(singleton) "+ typeof(T).ToString();
- 
-						DontDestroyOnLoad(singleton);
- 
-						Debug.Log("[Singleton] An instance of " + typeof(T) + 
-							" is needed in the scene, so '" + singleton +
-							"' was created with DontDestroyOnLoad.");
-					} else {
-						Debug.Log("[Singleton] Using instance already created: " +
-							_instance.gameObject.name);
-					}
-				}
- 
-				return _instance;
-			}
-		}
-	}
- 
-	private static bool applicationIsQuitting = false;
-	/// <summary>
-	/// When Unity quits, it destroys objects in a random order.
-	/// In principle, a Singleton is only destroyed when application quits.
-	/// If any script calls Instance after it have been destroyed, 
-	///   it will create a buggy ghost object that will stay on the Editor scene
-	///   even after stopping playing the Application. Really bad!
-	/// So, this was made to be sure we're not creating that buggy ghost object.
-	/// </summary>
-	public void OnDestroy () {
-		applicationIsQuitting = true;
-	}
-}
-```
-__Declaration:__
-
-```c#
-public class Manager : Singleton<Manager> 
-{
-	protected Manager () {} // guarantee this will be always a singleton only - can't use the constructor!
-	public string myGlobalVar = "whatever";
-}
-```
-
-__Unity reference:__
-http://wiki.unity3d.com/index.php?title=Singleton
-
-
 ## Unity Editor
 
-__Exposed Variables__
+###Exposed Variables
 
-+	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
-+	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
-+	The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
-+	Whenever possible, the ​_hierarchical order_​ of gameobjects should not matter. The one exception is the order of Canvas children, where the order is used for Z-indexes.
+-	For every component, only fields ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
+   + If a field should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]```
+-	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
+-	The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
+-	Whenever possible, the ​_hierarchical order_​ of gameobjects should not matter. The one exception is the order of Canvas children, where the order is used for Z-indexes.
+
+###SceneManager Organization
+
+stuff will be here eventually
 
 ## Credits
 
