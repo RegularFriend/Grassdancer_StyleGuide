@@ -4,15 +4,17 @@ Our overarching goals are __conciseness__, __readability__ and __simplicity__. A
 
 ## Inspiration
 
-This style-guide is somewhat of a mash-up between the existing C# language
-style guides, and a tutorial-readability focused Swift style-guide. guide). This style guide was created from the Java style guide and then altered from various C# / Unity style guides across the web.
+This style guide is forked from the raywenderlich(https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide but wiht alterations for our team's needs.
+
+The goals of this style guide are **conciseness**, **readibility**, and **ease of use** for the entire Sugarscape team.
 
 ## Table of Contents
 
+- [Visual Studio Settings](#visual-studio-settings)
 - [Nomenclature](#nomenclature)
   + [Script Files](#script-files)
   + [Classes & Interfaces](#classes--interfaces)
-  + [Methods](#methods)
+  + [Functions](#Functions)
   + [Fields](#fields)
   + [Parameters](#parameters--parameters)
   + [Delegates](#delegates--delegates)
@@ -37,6 +39,8 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
 - [Credits](#credits)
 
 
+## Visual Studio Settings
+Here is a policy file that can be imported into visual studio to set up automatic formatting. It can be imported through Tools->Import and Export Settings->Import selected environment settings. Click on the settings file and you should be good to go. *This will not overwrite your syntax highlight settings and color scheme*
 ## Nomenclature
 
 On the whole, naming should follow C# standards.
@@ -173,7 +177,7 @@ public delegate void RenderCallback()
 ```
 ### Events
 
-Prefix event methods with the prefix __On__.
+Prefix event functions with the prefix __On__.
 
 __BAD:__
 
@@ -217,7 +221,7 @@ findPostById
 
 ### Access Level Modifiers
 
-Access level modifiers should be explicitly defined for classes, methods and
+Access level modifiers should be explicitly defined for classes, functions and
 member variables.
 
 __BAD:__
@@ -323,9 +327,9 @@ int a = 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 1 + 3 + 1 + 
 
 ### Vertical Spacing
 
-There should be exactly one blank line between methods to aid in visual clarity 
-and organization. Whitespace within methods should separate functionality, but 
-having too many sections in a method often means you should refactor into
+There should be exactly one blank line between functions to aid in visual clarity 
+and organization. Whitespace within functions should separate functionality, but 
+having too many sections in a functions often means you should refactor into
 several methods.
 
 
@@ -410,8 +414,11 @@ Whenever possible, the ​_hierarchical order_​ of gameobjects should not matt
 
 ###Exposed Variables
 
--	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
-   + If a variable should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]``` *Variables should only be public if other scripts need to reference them*.
+For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
+
+If a variable should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]``` 
+
+*Variables should only be public if other scripts need to reference them*.
 
 __BAD:__
 
@@ -423,7 +430,7 @@ __GOOD:__
 
 ```c
 [SerializedField]
-private int editInInspector
+private int doesNotNeedToBePublic;
 ```
 
 ###SceneManager Organization
@@ -438,11 +445,13 @@ raywenderlich.com team members:
 - [Darryl Bayliss](https://github.com/DarrylBayliss)
 - [Sam Davies](https://github.com/sammyd)
 - [Mic Pringle](https://github.com/micpringle)
-- [Brian Moakley] (https://github.com/VegetarianZombie)
+- [Brian Moakley](https://github.com/VegetarianZombie)
 - [Ray Wenderlich](https://github.com/rwenderlich)
 
-As well as the Sugarscape engineers
+As well as the Sugarscape team
 
 - Will Anderson
 - Brendan LoBuglio
 - Chloe Lister
+- Lex Rhodes
+- Ryan Bo
