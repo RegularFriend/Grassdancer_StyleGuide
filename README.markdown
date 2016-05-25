@@ -31,6 +31,7 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
   + [Vertical Spacing](#vertical-spacing)
 - [Brace Style](#brace-style)
 - [Switch Statements](#switch-statements)
+- [Commenting](#commenting)
 - [Unity Editor](#unity-editor)
   + [Exposed Variables](#exposed-variables)
 - [Credits](#credits)
@@ -394,6 +395,10 @@ if (someTest) { doSomethingElse(); }
 Switch statements fall-through by default, but this can be unintuitive. Do not use fall-through behavior. 
 
 Alway include the `default` case.
+
+## Commenting
+
+Will have commenting spec here
 
 ## Unity Editor
 
