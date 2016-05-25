@@ -411,9 +411,9 @@ Whenever possible, the ​_hierarchical order_​ of gameobjects should not matt
 ###Exposed Variables
 
 -	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
-   + If a variable should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]```
+   + If a variable should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]``` *Variables should only be public if other scripts need to reference them*
 
-_BAD:__
+__BAD:__
 
 ```c#
 public int doesNotNeedToBePublic;
