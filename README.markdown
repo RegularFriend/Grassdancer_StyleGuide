@@ -32,7 +32,7 @@ style guides, and a tutorial-readability focused Swift style-guide. guide). This
 - [Brace Style](#brace-style)
 - [Switch Statements](#switch-statements)
 - [Unity Editor](#unity-editor)
-  + [Exposed Variables]()
+  + [Exposed Variables](#exposed-variables)
 - [Credits](#credits)
 
 
@@ -397,13 +397,29 @@ Alway include the `default` case.
 
 ## Unity Editor
 
+When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
+
+The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
+
+Whenever possible, the ​_hierarchical order_​ of gameobjects should not matter. The one exception is the order of Canvas children, where the order is used for Z-indexes.
+
 ###Exposed Variables
 
--	For every component, only fields ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
-   + If a field should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]```
--	When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
--	The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
--	Whenever possible, the ​_hierarchical order_​ of gameobjects should not matter. The one exception is the order of Canvas children, where the order is used for Z-indexes.
+-	For every component, only variables ​_we actively want to tweak_​ should ever be exposed to the inspector. All others should use ```private```, ```protected```, or ```[HideInInspector]```
+   + If a variable should be ```private``` but needs to be edited in inspector, you should declare it as private and mark it with ```[SeralizedField]```
+
+_BAD:__
+
+```c#
+public int doesNotNeedToBePublic;
+```
+
+__GOOD:__
+
+```c
+[SerializedField]
+private int editInInspector
+```
 
 ###SceneManager Organization
 
