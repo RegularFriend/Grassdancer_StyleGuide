@@ -198,9 +198,20 @@ public static event CloseCallback OnClose;
 
 Coroutines are written __UpperCamelCase__.
 
-When declaring delegates, DO add the suffix __Thread__. 
+When declaring coroutines, DO add the suffix __Thread__. 
 
 Coroutines should __always be private__. Use regular functions as wrappers when necessary.
+
+__BAD:__
+
+```c#
+public Coroutine renderStuff()
+```
+__GOOD:__
+
+```c#
+private Coroutine RenderCallbackThread()
+```
 
 ### Misc
 
