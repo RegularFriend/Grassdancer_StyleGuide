@@ -548,9 +548,9 @@ The different levels are:
 
 - PlayerScene (The only "level" not broken up into parts. All global objects should go here)
 - Hub
-- Region1
-- Region2
-- Region3
+- R1
+- R2
+- R3
 
 The different parts of each level (excluding PlayerScene) are:
 
@@ -564,13 +564,13 @@ Scenes are all __UpperCamelCase__ and are named "LevelName" + "PartName" and sho
 __BAD:__
 
 ```c#
-hub_Audio.unity
+R1_Audio.unity
 ```
 
 __GOOD:__
 
 ```c#
-HubAudio.unity
+R1Audio.unity
 ```
 
 ## GameManager & Services
@@ -581,11 +581,15 @@ Grassdancer only has one singleton titled GameManager, which contains a variety 
 
 To access a service in a script you first must make a reference to the desired service. To do so you first declare a private interface of the type matches the type of the desired service. 
 
-```c# private IDesiredService desiredManager```
+```c# 
+private IDesiredService desiredManager
+```
 
 Then in Start(), you set the reference through 
 
-```c# desiredManager = GameManager.Getservice(typeof(IDesiredService)) as IDesiredService```
+```c# 
+desiredManager = GameManager.Getservice(typeof(IDesiredService)) as IDesiredService
+```
 
 Once this has been done you can use the service as needed. 
 
@@ -651,7 +655,8 @@ raywenderlich.com team members:
 As well as the Sugarscape team:
 
 - Will Anderson
-- Brendan LoBuglio
-- Chloe Lister
-- Lex Rhodes
-- Ryan Bo
+- [Brendan LoBuglio](https://twitter.com/BrendanLoBuglio)
+- [Chloe Lister](https://twitter.com/chlolist)
+- [Lex Rhodes](https://twitter.com/upsetspacecadet)
+- [Ryan BoBell](https://twitter.com/RyanBobell)
+- Jonathan Bodian
