@@ -654,7 +654,7 @@ raywenderlich.com team members:
 
 As well as the Sugarscape team:
 
-- [Will Anderson](https://twitter.com/reallyfriend)
+- [Will Anderson](https://twitter.com/regularfriend)
 - [Brendan LoBuglio](https://twitter.com/BrendanLoBuglio)
 - [Chloe Lister](https://twitter.com/chlolist)
 - [Lex Rhodes](https://twitter.com/upsetspacecadet)
