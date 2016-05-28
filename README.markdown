@@ -14,6 +14,7 @@ The goals of this style guide are **conciseness**, **readibility**, and **ease o
 - [Nomenclature](#nomenclature)
   + [Script Files](#script-files)
   + [Classes & Interfaces](#classes--interfaces)
+  + [Services](#services)
   + [Functions](#Functions)
   + [Fields](#fields)
   + [Parameters](#parameters)
@@ -34,8 +35,11 @@ The goals of this style guide are **conciseness**, **readibility**, and **ease o
 - [Brace Style](#brace-style)
 - [Switch Statements](#switch-statements)
 - [Commenting](#commenting)
+  + [Classes and Functions](#classes-functions)
 - [Unity Editor](#unity-editor)
   + [Exposed Variables](#exposed-variables)
+- [GameManager and Services](#gamemanager-services)
+  + [Accessing a Service](#accessing-a-service)
 - [Credits](#credits)
 
 
@@ -70,6 +74,35 @@ GameManager.cs
 ### Classes & Interfaces
 
 Written in __UpperCamelCase__. For example `RadialSlider`. 
+
+DO add the suffix __Service__ to all Interfaces used for Services.
+
+__BAD__:
+
+```c#
+Interface IAudioServiceInterface
+```
+
+__GOOD__:
+
+```c#
+Interface IAudioService
+```
+
+### Services
+
+DO add the suffix __Manager__ to names of Services
+
+__BAD:__
+
+```c#
+public class AudioService: MonoBehavior, IAudioService
+```
+__GOOD:__
+
+```c#
+public class AudioManager: MonoBehavior, IAudioService
+```
 
 ### Functions
 
@@ -126,6 +159,19 @@ __GOOD:__
 private int myPrivateVariable
 ```
 
+Local versions of UnityEngine reserved names should be named mComponentName unless a more specific name is desired.
+
+__BAD:__
+
+```c#
+private Rigidbody rigidbody;
+```
+
+__GOOD:__
+
+```c#
+private Rigidbody mRigidbody;
+```
 
 ### Parameters
 
@@ -417,7 +463,53 @@ Alway include the `default` case.
 
 ## Commenting
 
-Will have commenting spec here
+###Classes & Functions
+
+Every class and function should have a visual studio ```<summary>``` comment directly above its declaration. This will create a Visual Studio tooltip explaining to other members of our team what the function does. If the function can be described in one line, this comment should be inline. If the description is longer than a line, this comment can span multiple lines. For these comments to work they must be proceeded by ```///``` instead of just ```//```.
+
+__Inline Example:__
+
+```c#
+///<summary>Comment goes here.</summary>
+public void HasATooltip(){
+
+}
+```
+
+__Multi-line Example:__
+
+```c#
+///<summary>
+///Comment goes here.
+///Second comment does here.
+///</summary>
+public void HasATooltip(){
+
+}
+```
+
+###Fields
+
+Unless it is explicitally clear what a field does, it should have an inline comment explaining what it does. These comments should be formatted to be clear to read as you go down the document. 
+
+__BAD:__
+
+```c#
+public int variableA;               //A variable
+public int variableB;       //Not a useful comment
+public int variableC;
+public Rigidbody mRigidBody;        //My rigid body
+```
+
+__GOOD:__
+
+```c#
+public int variableA;               //Start point of movement lerp
+public int variableB;               //End point of movement lerp
+public int variableC;               ///Lerp amount
+public Rigidbody mRigidBody;
+```
+
 
 ## Unity Editor
 
@@ -443,14 +535,107 @@ public int doesNotNeedToBePublic;
 
 __GOOD:__
 
-```c
+```c#
 [SerializedField]
 private int doesNotNeedToBePublic;
 ```
 
 ###SceneManager Organization
 
-stuff will be here eventually
+Grassdancer uses Unity's new SceneManager to break up scenes in order to make it easy for our team to work on the same scene at the same time. As the scenes in our project will be organized first by what level they are and then by what part of the level they are. 
+
+The different levels are:
+
+- PlayerScene (The only "level" not broken up into parts. All global objects should go here)
+- Hub
+- Region1
+- Region2
+- Region3
+
+The different parts of each level (excluding PlayerScene) are:
+
+- Audio
+- Decorative
+- GameplayGeo
+- NPCs
+
+Scenes are all __UpperCamelCase__ and are named "LevelName" + "PartName" and should be saved under Assets/_Scenes/"LevelName"
+
+__BAD:__
+
+```c#
+hub_Audio.unity
+```
+
+__GOOD:__
+
+```c#
+HubAudio.unity
+```
+
+## GameManager & Services
+
+Grassdancer only has one singleton titled GameManager, which contains a variety of Services. These services can be referenced by other scripts independantly of one another and function as modular parts of the singleton. The purpose of this is to have a system that only uses one singleton but is still highly modular and efficient. 
+
+### Accessing a Service
+
+To access a service in a script you first must make a reference to the desired service. To do so you first declare a private interface of the type matches the type of the desired service. 
+
+```c# private IDesiredService desiredManager```
+
+Then in Start(), you set the reference through 
+
+```c# desiredManager = GameManager.Getservice(typeof(IDesiredService)) as IDesiredService```
+
+Once this has been done you can use the service as needed. 
+
+### Creating a Service
+
+There are three parts to creating a service. 
+
+First, you need to create an interface. This interface functions similarly to a .h file in C++ in that it prototypes the functions that will be implemented in the Service itself. All Interfaces used in conjunction with a Service should b esaved in Assets/Scripts/GameManagers/ServiceInterfaces.
+
+This is what makes our system modluar as it will allow for an engineer to change whatever they want (outside of a few things like parameters) to the service itself without affecting any of the other scripts that reference it. *Note that unlike a .h file in C++ everything declared in an Interface must be public. If you need private variables declare and instantiate them in the Service itself*
+
+__Example:__
+
+```c#
+public interface IAudioService
+{
+    ///<summary>Plays a 2D Sound</summary>
+    void Play2DSound(string soundName, float volume = 1f);
+    ///<summary>Plays a 3D Sound</summary>
+    void Play3DSound(string soundName, Vector3 position, float volume = 1f);
+}
+```
+
+Second, you need to create the service. A service should inherit from both MonoBehavior and the interface that it is attached to. The service should implement everything declared in its Interface as well as any functionality that is needed for the service to work, but isn't necessairly needed by the scripts that will reference the service. Services should be saved to Assets/Scripts/GameManagers/Services.
+
+__Example:__
+
+```c#
+public class AudioManager : MonoBehaviour, IAudioService
+{
+    public void Play2DSound(string soundName, float volume = 1f)
+    {
+        //Implementation goes here
+    }
+
+    public void Play3DSound(string soundName, Vector3 position, float volume = 1f)
+    {
+        //Implementation goes here
+    }
+}
+```
+
+Finally, once your service is created and functional, you need to register it to the ServiceContainer on GameManager so other scripts can access it. To do so you must add the following lines of code to the GameManager's InitalizeServices function. (replace IAudioService with the name of your interface and AudioManager with the name of your service)
+
+```c#
+    IAudioService audioService = gameObject.AddComponent<AudioManager>();
+    services.RegisterService(typeof(IAudioService), audioService);
+```
+
+This instantiates the service and adds it to the ServiceContainer, which allows other scripts to access it through GetService);
 
 ## Credits
 
@@ -463,7 +648,7 @@ raywenderlich.com team members:
 - [Brian Moakley](https://github.com/VegetarianZombie)
 - [Ray Wenderlich](https://github.com/rwenderlich)
 
-As well as the Sugarscape team
+As well as the Sugarscape team:
 
 - Will Anderson
 - Brendan LoBuglio
