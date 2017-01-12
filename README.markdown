@@ -1,12 +1,12 @@
 # The Official Grassdancer C# Style Guide
 
-Our overarching goals are __conciseness__, __readability__ and __simplicity__. Also, this guide is written to keep Unity in mind. 
+Our overarching goals are __conciseness__, __readability__ and __simplicity__. 
 
 ## Inspiration
 
-This style guide is forked from the [raywenderlich](https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide but wiht alterations for our team's needs.
+This style guide is forked from the [raywenderlich](https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide, and significantly altered based on our team's own style decisions.
 
-The goals of this style guide are **conciseness**, **readibility**, and **ease of use** for the entire Sugarscape team.
+The goals of this style guide are **conciseness**, **readability**, and **ease of use** for the entire Sugarscape team.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ The goals of this style guide are **conciseness**, **readibility**, and **ease o
 - [Declarations](#declarations)
   + [Access Level Modifiers](#access-level-modifiers)
   + [Fields & Variables](#fields--variables)
-  + [Classes](#classe)
+  + [Classes](#classes)
   + [Interfaces](#interfaces)
   + [Enums](#Enums)
 - [Spacing](#spacing)
@@ -57,7 +57,7 @@ On the whole, naming should follow C# standards.
 
 Script files are all __UpperCamelCase__, multiple words concatenated together,
 without
-hypens or underscores:
+hyphens or underscores:
 
 __BAD__:
 
@@ -96,19 +96,19 @@ DO add the suffix __Manager__ to names of Services
 __BAD:__
 
 ```c#
-public class AudioService: MonoBehavior, IAudioService
+public class AudioService: MonoBehaviour, IAudioService
 ```
 __GOOD:__
 
 ```c#
-public class AudioManager: MonoBehavior, IAudioService
+public class AudioManager: MonoBehaviour, IAudioService
 ```
 
 ### Functions
 
 Public functions are written in __UpperCamelCase__. For example `DoSomething`. 
 
-Private functions are written in __lowerCamelCase__. For example: `doSometing`
+Private functions are written in __lowerCamelCase__. For example: `doSomething`
 
 __BAD__:
 
@@ -490,7 +490,7 @@ public void HasATooltip(){
 
 ###Fields
 
-Unless it is explicitally clear what a field does, it should have an inline comment explaining what it does. These comments should be formatted to be clear to read as you go down the document. 
+Unless it is explicitly clear what a field does, it should have an inline comment explaining what it does. These comments should be formatted to be clear to read as you go down the document. 
 
 __BAD:__
 
@@ -498,7 +498,7 @@ __BAD:__
 public int variableA;               //A variable
 public int variableB;       //Not a useful comment
 public int variableC;
-public Rigidbody mRigidBody;        //My rigid body
+public Rigidbody mRigidbody;        //My rigid body
 ```
 
 __GOOD:__
@@ -507,7 +507,7 @@ __GOOD:__
 public int variableA;               //Start point of movement lerp
 public int variableB;               //End point of movement lerp
 public int variableC;               ///Lerp amount
-public Rigidbody mRigidBody;
+public Rigidbody mRigidbody;
 ```
 
 
@@ -536,7 +536,7 @@ public int doesNotNeedToBePublic;
 __GOOD:__
 
 ```c#
-[SerializedField]
+[SerializeField]
 private int doesNotNeedToBePublic;
 ```
 
@@ -575,7 +575,7 @@ R1Audio.unity
 
 ## GameManager & Services
 
-Grassdancer only has one singleton titled GameManager, which contains a variety of Services. These services can be referenced by other scripts independantly of one another and function as modular parts of the singleton. The purpose of this is to have a system that only uses one singleton but is still highly modular and efficient. 
+Grassdancer only has one singleton, called 'GameManager', which contains a variety of Services. These services can be referenced by other scripts independently of one another and function as modular parts of the singleton. The purpose of this is to have a system that only uses one singleton but is still highly modular and efficient. 
 
 ### Accessing a Service
 
@@ -597,9 +597,9 @@ Once this has been done you can use the service as needed.
 
 There are three parts to creating a service. 
 
-First, you need to create an interface. This interface functions similarly to a .h file in C++ in that it prototypes the functions that will be implemented in the Service itself. All Interfaces used in conjunction with a Service should b esaved in Assets/Scripts/GameManagers/ServiceInterfaces.
+First, you need to create an interface. This interface functions similarly to a .h file in C++ in that it prototypes the functions that will be implemented in the Service itself. All Interfaces used in conjunction with a Service should be saved in Assets/Scripts/GameManagers/ServiceInterfaces.
 
-This is what makes our system modluar as it will allow for an engineer to change whatever they want (outside of a few things like parameters) to the service itself without affecting any of the other scripts that reference it. *Note that unlike a .h file in C++ everything declared in an Interface must be public. If you need private variables declare and instantiate them in the Service itself*
+This is what makes our system modular as it will allow for an engineer to change whatever they want (outside of a few things like parameters) to the service itself without affecting any of the other scripts that reference it. *Note that unlike a .h file in C++ everything declared in an Interface must be public. If you need private variables declare and instantiate them in the Service itself*
 
 __Example:__
 
@@ -613,7 +613,7 @@ public interface IAudioService
 }
 ```
 
-Second, you need to create the service. A service should inherit from both MonoBehavior and the interface that it is attached to. The service should implement everything declared in its Interface as well as any functionality that is needed for the service to work, but isn't necessairly needed by the scripts that will reference the service. Services should be saved to Assets/Scripts/GameManagers/Services.
+Second, you need to create the service. A service should inherit from both MonoBehaviour and the interface that it is attached to. The service should implement everything declared in its Interface as well as any functionality that is needed for the service to work, but isn't necessarily needed by the scripts that will reference the service. Services should be saved to Assets/Scripts/GameManagers/Services.
 
 __Example:__
 
@@ -632,7 +632,7 @@ public class AudioManager : MonoBehaviour, IAudioService
 }
 ```
 
-Finally, once your service is created and functional, you need to register it to the ServiceContainer on GameManager so other scripts can access it. To do so you must add the following lines of code to the GameManager's InitalizeServices function. (replace IAudioService with the name of your interface and AudioManager with the name of your service)
+Finally, once your service is created and functional, you need to register it to the ServiceContainer on GameManager so other scripts can access it. To do so you must add the following lines of code to the GameManager's InitializeServices function. (replace IAudioService with the name of your interface and AudioManager with the name of your service)
 
 ```c#
     IAudioService audioService = gameObject.AddComponent<AudioManager>();
@@ -658,5 +658,5 @@ As well as the Sugarscape team:
 - [Brendan LoBuglio](https://twitter.com/BrendanLoBuglio)
 - [Chloe Lister](https://twitter.com/chlolist)
 - [Lex Rhodes](https://twitter.com/upsetspacecadet)
-- [Ryan BoBell](https://twitter.com/RyanBobell)
+- [Ryan Bobell](https://twitter.com/RyanBobell)
 - Jonathan Bodian
