@@ -1,10 +1,8 @@
 # The Official Grassdancer C# Style Guide
 
-Our overarching goals are __conciseness__, __readability__ and __simplicity__. 
-
 ## Inspiration
 
-This style guide is forked from the [raywenderlich](https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide, and significantly altered based on our team's own style decisions.
+This style guide outlines the basic stylistic rules to follow when writing code for Grassdancer. The document you're reading is originally forked from the [raywenderlich](https://github.com/raywenderlich/c-sharp-style-guide/blob/master/README.markdown) style guide, and significantly altered based on our team's own style decisions.
 
 The goals of this style guide are **conciseness**, **readability**, and **ease of use** for the entire Sugarscape team.
 
@@ -44,7 +42,7 @@ The goals of this style guide are **conciseness**, **readability**, and **ease o
 
 
 ## Visual Studio Settings
-[Here](https://drive.google.com/open?id=0Bxad50Rx4CmIbXZjQmdtOFVlNE0) is a policy file that can be imported into visual studio to set up automatic formatting. 
+[Here](https://drive.google.com/open?id=0Bxad50Rx4CmIbXZjQmdtOFVlNE0) is a policy file that can be imported into Visual Studio to set up automatic formatting. 
 
 It can be imported through Tools->Import and Export Settings->Import selected environment settings. Click on the settings file and you should be good to go. 
 
@@ -73,7 +71,7 @@ GameManager.cs
 
 ### Classes & Interfaces
 
-Written in __UpperCamelCase__. For example `RadialSlider`. 
+Written in __UpperCamelCase__. For example, `RadialSlider` 
 
 DO add the suffix __Service__ to all Interfaces used for Services.
 
@@ -106,9 +104,9 @@ public class AudioManager: MonoBehaviour, IAudioService
 
 ### Functions
 
-Public functions are written in __UpperCamelCase__. For example `DoSomething`. 
+Public functions are written in __UpperCamelCase__. For example, `DoSomething`
 
-Private functions are written in __lowerCamelCase__. For example: `doSomething`
+Private functions are written in __lowerCamelCase__. For example, `doSomething`
 
 __BAD__:
 
@@ -282,14 +280,14 @@ findPostById
 
 ### Access Level Modifiers
 
-Access level modifiers should be explicitly defined for classes, functions and
+Access level modifiers should be explicitly defined for all classes, functions and
 member variables.
 
 __BAD:__
 
 ```c#
 string word 
-int Id;
+int id;
 ```
 
 __GOOD:__
@@ -305,19 +303,19 @@ Prefer single declaration per line.
 __BAD:__
 
 ```c#
-string username, twitterHandle;
+private string username, twitterHandle;
 ```
 
 __GOOD:__
 
 ```c#
-string username;
-string twitterHandle;
+private string username;
+private string twitterHandle;
 ```
 
 ### Classes
 
-Exactly one class per source file, except for tiny struct-like classes used in the 
+Generally keep to one class per source file, except for tiny struct-like classes used in the 
 main class of a source file.
 
 ### Interfaces
@@ -357,7 +355,7 @@ enum Days {
 __GOOD:__
 
 ```c#
-enum Days {Sat=1, Sun, Mon, Tue, Wed, Thu, Fri};
+enum Days {Sat, Sun, Mon, Tue, Wed, Thu, Fri};
 ```
 
 ## Spacing
@@ -368,7 +366,7 @@ Always indent - never spaces.
 
 ### Line Length
 
-Lines should be no longer than 150 characters. If a line exceeds 150 characters you should start a new line. Ideally lines will end after an operator (=, < ect).
+Lines should be no longer than 150 characters. If a line exceeds 150 characters you should start a new line. Ideally, lines which break should do so after an operator (=, < etc).
 
 There should always be a single indent on the new line when a line is broken up in this manner.
 
@@ -399,7 +397,7 @@ several methods.
 +	The opening-braces for Classes and functions get their own lines.
 +	All other opening-braces -- ifs, elses, etc. -- should be on the same line as the preceding statement.
 +	Trailing closing-braces always get their own line.
-+	Else gets its own line
++	Elses and else-ifs get their own line
 
 __BAD:__
 
@@ -465,7 +463,7 @@ Alway include the `default` case.
 
 ###Classes & Functions
 
-Every class and function should have a visual studio ```<summary>``` comment directly above its declaration. This will create a Visual Studio tooltip explaining to other members of our team what the function does. If the function can be described in one line, this comment should be inline. If the description is longer than a line, this comment can span multiple lines. For these comments to work they must be proceeded by ```///``` instead of just ```//```.
+Classes and functions that see heavy use should have a Visual Studio ```<summary>``` comment directly above their declarations. This will create a Visual Studio tooltip explaining to other members of our team what the function does. If the function can be described in one line, this comment should be inline. If the description is longer than a line, this comment can span multiple lines. For these comments to work they must be proceeded by ```///``` instead of just ```//```.
 
 __Inline Example:__
 
@@ -506,14 +504,14 @@ __GOOD:__
 ```c#
 public int variableA;               //Start point of movement lerp
 public int variableB;               //End point of movement lerp
-public int variableC;               ///Lerp amount
+public int variableC;               //Lerp amount
 public Rigidbody mRigidbody;
 ```
 
 
 ## Unity Editor
 
-When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a singleton to get your references
+When assigning references to other components and GameObjects from a script, do as much as possible to avoid assigning references in the inspector. Whenever possible, use ```GetComponent``` or the getters on a service to get your references
 
 The name of a GameObject should ​_never_​ matter -- reserve names for labeling and organization! This means that ```GameObject.Find``` is ​_banned._​
 
@@ -536,8 +534,7 @@ public int doesNotNeedToBePublic;
 __GOOD:__
 
 ```c#
-[SerializeField]
-private int doesNotNeedToBePublic;
+[SerializeField] private int doesNotNeedToBePublic;
 ```
 
 ###SceneManager Organization
@@ -579,7 +576,7 @@ Grassdancer only has one singleton, called 'GameManager', which contains a varie
 
 ### Accessing a Service
 
-To access a service in a script you first must make a reference to the desired service. To do so you first declare a private interface of the type matches the type of the desired service. 
+To access a service in a script you first must make a reference to the desired service. To do so, you first declare a private interface with a type matching the type of the desired service. 
 
 ```c# 
 private IDesiredService desiredManager
@@ -599,7 +596,7 @@ There are three parts to creating a service.
 
 First, you need to create an interface. This interface functions similarly to a .h file in C++ in that it prototypes the functions that will be implemented in the Service itself. All Interfaces used in conjunction with a Service should be saved in Assets/Scripts/GameManagers/ServiceInterfaces.
 
-This is what makes our system modular as it will allow for an engineer to change whatever they want (outside of a few things like parameters) to the service itself without affecting any of the other scripts that reference it. *Note that unlike a .h file in C++ everything declared in an Interface must be public. If you need private variables declare and instantiate them in the Service itself*
+This is what makes our system modular, as it will allow for an engineer to change whatever they want (outside of a few things like parameters) to the service itself without affecting any of the other scripts that reference it. *Note that unlike a .h file in C++, everything declared in an Interface must be public. If you need private variables declare and instantiate them in the Service itself*
 
 __Example:__
 
@@ -643,7 +640,7 @@ This instantiates the service and adds it to the ServiceContainer, which allows 
 
 ## Credits
 
-This style guide is a collaborative effort from the most stylish
+The original version of this style guide was a collaborative effort from the most stylish
 raywenderlich.com team members:
 
 - [Darryl Bayliss](https://github.com/DarrylBayliss)
@@ -652,7 +649,7 @@ raywenderlich.com team members:
 - [Brian Moakley](https://github.com/VegetarianZombie)
 - [Ray Wenderlich](https://github.com/rwenderlich)
 
-As well as the Sugarscape team:
+The version you are reading was put together by the Sugarscape team:
 
 - [Will Anderson](https://twitter.com/regularfriend)
 - [Brendan LoBuglio](https://twitter.com/BrendanLoBuglio)
